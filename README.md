@@ -1,5 +1,7 @@
 # Bring MySmartBlinds back to SmartThings and Alexa
 
+> **Experimental USB setup wizard:** Windows and Mac test builds replace the firmware build and initial web setup steps. See the [installer and tester guide](docs/INSTALLER_GUIDE.md). Physical hardware testing is still required.
+
 Restore control of first-generation MySmartBlinds Bluetooth tilt motors with an
 ESP32 bridge and a SmartThings hub. Control your blinds from SmartThings at home
 or away, include them in routines, and use Alexa **through the SmartThings skill**.

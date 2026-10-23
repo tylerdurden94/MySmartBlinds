@@ -1,0 +1,83 @@
+name: Build USB setup installers
+on:
+  workflow_dispatch:
+  push:
+    branches: ['codex/usb-setup-installer']
+    paths: ['installer/**', 'esp_bridge/**', 'docs/INSTALLER_GUIDE.md', '.github/workflows/build-installers.yml']
+  pull_request:
+    paths: ['installer/**', 'esp_bridge/**', 'docs/INSTALLER_GUIDE.md', '.github/workflows/build-installers.yml']
+permissions:
+  contents: read
+jobs:
+  firmware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install platformio==6.2.0
+      - run: pio run -d esp_bridge
+      - name: Collect clean firmware images
+        shell: python
+        run: |
+          from pathlib import Path
+          import shutil
+          output = Path('installer-assets')
+          output.mkdir()
+          for name in ('bootloader.bin', 'partitions.bin', 'firmware.bin'):
+              shutil.copyfile(Path('esp_bridge/.pio/build/esp32-wroom-32d') / name, output / name)
+          shutil.copyfile(Path.home() / '.platformio/packages/framework-arduinoespressif32/tools/partitions/boot_app0.bin', output / 'boot_app0.bin')
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installer-firmware
+          path: installer-assets/*.bin
+          retention-days: 14
+  package:
+    needs: firmware
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            label: Windows-x64
+          - os: macos-15-intel
+            label: macOS-Intel
+          - os: macos-15
+            label: macOS-AppleSilicon
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r installer/requirements-build.txt
+      - run: python -m pip download --no-deps --no-binary=esptool --no-build-isolation --dest installer/third-party-source esptool==4.11.0
+      - run: python -m unittest discover -s installer/tests -v
+      - uses: actions/download-artifact@v4
+        with:
+          name: installer-firmware
+          path: downloaded-firmware
+      - name: Prepare downloaded build
+        shell: python
+        run: |
+          from pathlib import Path
+          import shutil
+          base = Path('downloaded-firmware')
+          output = Path('installer-input')
+          output.mkdir()
+          framework = Path('installer-framework/tools/partitions')
+          framework.mkdir(parents=True)
+          for name in ('bootloader.bin', 'partitions.bin', 'firmware.bin', 'boot_app0.bin'):
+              files = list(base.rglob(name))
+              assert len(files) == 1, (name, files)
+              shutil.copyfile(files[0], (framework if name == 'boot_app0.bin' else output) / name)
+      - run: python installer/build.py --firmware-dir installer-input --framework-dir installer-framework
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MySmartBlinds-Setup-${{ matrix.label }}
+          path: |
+            installer/dist/*.zip
+            installer/dist/*.sha256
+            installer/dist/self-test.json
+          retention-days: 30

@@ -1,0 +1,38 @@
+{
+  "tag": "en",
+  "label": "Charging",
+  "attributes": {
+    "chargingSource": {
+      "label": "Charging source",
+      "displayTemplate": "Charging source of {{device.label}} is {{value}}",
+      "i18n": {
+        "value": {
+          "none": "none",
+          "solar": "solar",
+          "usb": "usb",
+          "both": "both"
+        }
+      }
+    },
+    "temperatureReady": {
+      "label": "Temperature calibration",
+      "displayTemplate": "Temperature calibration of {{device.label}} is {{value}}",
+      "i18n": {
+        "value": {
+          "unverified": "unverified",
+          "ready": "ready"
+        }
+      }
+    },
+    "lightReady": {
+      "label": "Light calibration",
+      "displayTemplate": "Light calibration of {{device.label}} is {{value}}",
+      "i18n": {
+        "value": {
+          "unverified": "unverified",
+          "ready": "ready"
+        }
+      }
+    }
+  }
+}

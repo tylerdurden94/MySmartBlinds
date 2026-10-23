@@ -1,0 +1,46 @@
+{
+  "tag": "en",
+  "label": "Blind sensors",
+  "attributes": {
+    "solarCharging": {
+      "label": "Solar charging",
+      "displayTemplate": "Solar charging of {{device.label}} is {{value}}",
+      "i18n": {}
+    },
+    "usbCharging": {
+      "label": "USB charging",
+      "displayTemplate": "USB charging of {{device.label}} is {{value}}",
+      "i18n": {}
+    },
+    "batteryVoltage": {
+      "label": "Battery voltage raw",
+      "displayTemplate": "Battery voltage raw of {{device.label}} is {{value}}",
+      "i18n": {}
+    },
+    "batteryCharge": {
+      "label": "Battery charge raw",
+      "displayTemplate": "Battery charge raw of {{device.label}} is {{value}}",
+      "i18n": {}
+    },
+    "solarPanelVoltage": {
+      "label": "Solar panel voltage raw",
+      "displayTemplate": "Solar panel voltage raw of {{device.label}} is {{value}}",
+      "i18n": {}
+    },
+    "interiorTemperature": {
+      "label": "Interior temperature raw",
+      "displayTemplate": "Interior temperature raw of {{device.label}} is {{value}}",
+      "i18n": {}
+    },
+    "batteryTemperature": {
+      "label": "Battery temperature raw",
+      "displayTemplate": "Battery temperature raw of {{device.label}} is {{value}}",
+      "i18n": {}
+    },
+    "light": {
+      "label": "Light raw",
+      "displayTemplate": "Light raw of {{device.label}} is {{value}}",
+      "i18n": {}
+    }
+  }
+}

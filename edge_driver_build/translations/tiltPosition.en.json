@@ -1,0 +1,17 @@
+{
+  "tag": "en",
+  "label": "Measured tilt",
+  "attributes": {
+    "position": {
+      "label": "Measured tilt",
+      "displayTemplate": "Measured tilt of {{device.label}} is {{value}}/200",
+      "i18n": {}
+    }
+  },
+  "commands": {
+    "setPosition": {
+      "label": "Set tilt position",
+      "arguments": {}
+    }
+  }
+}

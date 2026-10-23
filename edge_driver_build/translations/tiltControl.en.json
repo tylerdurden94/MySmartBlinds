@@ -1,0 +1,17 @@
+{
+  "tag": "en",
+  "label": "Requested tilt (100 = flat)",
+  "attributes": {
+    "targetPosition": {
+      "label": "Requested tilt",
+      "displayTemplate": "Requested tilt of {{device.label}} is {{value}}/200",
+      "i18n": {}
+    }
+  },
+  "commands": {
+    "setPosition": {
+      "label": "Set tilt position",
+      "arguments": {}
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "tag": "en",
+  "label": "Light level",
+  "attributes": {
+    "lightLevel": {
+      "label": "Relative light level",
+      "displayTemplate": "Relative light level of {{device.label}} is {{value}}",
+      "i18n": {}
+    },
+    "lightRange": {
+      "label": "Light display range",
+      "displayTemplate": "Light display range of {{device.label}} is {{value}}",
+      "i18n": {}
+    }
+  }
+}

@@ -192,12 +192,95 @@ if app wording differs. Use the SmartThings skill for this solution. Remote
 access and Alexa need internet service; local Bluetooth communication between
 the ESP32 and motors does not restore the retired manufacturer's cloud service.
 
-## 9. Add another standalone bridge, if needed
+## 9. Use multiple ESP32 bridges for better coverage
 
-Flash another board with this same firmware, set up its Wi-Fi, save its own token,
-and import the same backup. Assign each blind to **exactly one** board, choosing
-the board with reliable coverage. Install the driver once per hub; discovery
-finds the additional bridge. Enter that bridge's token in its setup device.
+One ESP32 can control several blinds. You do **not** need a separate ESP32 for
+every blind. Add another bridge when one location cannot reliably reach all of
+your motors over Bluetooth—for example, in a house with multiple floors, distant
+rooms, thick walls, or blinds at opposite ends of the building.
+
+Each ESP32 needs both a reliable Wi-Fi connection to your home network and a
+reliable Bluetooth connection to its assigned blinds. Good Wi-Fi by itself does
+not guarantee that it can reach a blind over Bluetooth. Moving a bridge closer
+or adding one near a distant group can help with weak-signal command failures.
+It does not repair a motor's mechanical problems.
+
+All bridges use the **same firmware and the same SmartThings driver**:
+
+```text
+                         -> ESP32 near downstairs blinds -> downstairs motors
+SmartThings hub -> LAN
+                         -> ESP32 near upstairs blinds   -> upstairs motors
+```
+
+The ESP32s connect independently to your network. They do not form a Bluetooth
+mesh, repeat each other's radio signals, or automatically take over each other's
+blinds. Each board has its own setup address, configuration, and LAN token.
+
+### Set up and assign an additional bridge
+
+1. Flash another compatible ESP32 with this project's firmware, following steps
+   3–5. Set up one new board at a time so you know which setup network belongs to it.
+2. Connect it to the same reachable home LAN as your SmartThings hub. Save its
+   setup hostname/IP address and its own LAN token separately from your other
+   bridge's details. Leave it powered near the blinds it will serve.
+3. Import the same compatible app backup on the new board's `/setup` page. A
+   newly configured bridge starts with the imported blinds disabled. A bridge
+   can know a blind's record without being assigned to control it.
+4. On each bridge's setup page, run a range scan and compare which blinds are
+   visible. Repeat scans if a motor is missed. Choose the bridge with reliable
+   coverage for each blind; a scan is a placement aid, not proof of control.
+5. Check **Enabled here** only for the blinds this board should control and
+   select **Save enabled blinds**. **Assign each blind to exactly one bridge.**
+   If moving a blind from an existing bridge, first uncheck it there and save;
+   then enable it on the new bridge and save. Saving assignments restarts the board.
+6. Run **Scan nearby** again in SmartThings. You install the Edge driver only
+   **once per hub**, not once per ESP32. Discovery finds each bridge and its
+   assigned blinds.
+7. Open the new **MySmartBlinds Bridge** setup device → **Settings** → **Bridge
+   token**, enter that board's token, and save. Do this for every additional bridge.
+   Each blind automatically uses the token of its assigned bridge.
+8. Refresh and test each moved/new blind from SmartThings. Observe physical
+   Open/Close movement from the bridges' intended locations before relying on routines.
+
+For example, the same backup can be imported into both boards, with assignments
+like these:
+
+| Blind | Downstairs bridge: Enabled here | Upstairs bridge: Enabled here |
+| --- | --- | --- |
+| Living room | Yes | No |
+| Kitchen | Yes | No |
+| Bedroom | No | Yes |
+
+The driver routes each blind's commands to its assigned bridge. Users continue
+to see one SmartThings device per blind and can include blinds from different
+bridges in the same routines or Alexa groups through SmartThings. There is no
+separate Alexa account link for each ESP32.
+
+### Moving blinds between bridges and current limits
+
+The driver identifies a blind by the UUID imported from your backup, rather than
+by the ESP32's address. After changing assignments and rerunning discovery, it
+can route the existing SmartThings blind device to the new bridge. Keep the same
+blind UUID; normally you do not need to delete/recreate the SmartThings device
+or rebuild its routines simply to change its bridge.
+
+If a blind is enabled on two bridges, the driver treats that as a conflict and
+blocks its command routing until the overlap is fixed. If it is enabled nowhere,
+no bridge is assigned to control it. If a bridge goes offline, its blinds have
+no automatic failover; restore that board or deliberately reassign them to a
+reachable board.
+
+Each bridge supports **up to ten stored blind records, including disabled
+records**. The current backup importer rejects a file with more than ten blinds;
+adding boards does not automatically bypass that import limit. Additional bridges
+are useful for coverage and distributing work, but this guide does not claim an
+unlimited number of blinds or a tested maximum number of ESP32s.
+
+Each board processes its own Bluetooth work serially. Spreading blinds across
+boards can distribute that work, but movement across a group is not synchronized
+and faster completion is not guaranteed. Polling and retry battery costs still
+apply to each motor; see the [driver guide](SMARTTHINGS_DRIVER_GUIDE.md).
 
 ## Optional: USB provisioning instead of web import
 

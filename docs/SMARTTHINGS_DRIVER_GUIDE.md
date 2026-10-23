@@ -4,7 +4,8 @@ This guide explains the **MySmartBlinds ESP Bridge** Edge driver after you have
 installed it and discovered your blinds. For hardware, Wi-Fi, backup import, and
 driver installation, follow the [beginner guide](BEGINNER_GUIDE.md).
 
-Jump to [controls](#controls-and-readings), [basic settings](#basic-settings),
+Jump to [multiple bridges](#multiple-bridges-and-blind-assignments),
+[controls](#controls-and-readings), [basic settings](#basic-settings),
 [polling and battery life](#polling-when-to-turn-it-on-and-the-battery-cost),
 [Open/Close retries](#openclose-retries-helping-motors-that-intermittently-stop-short),
 or [experimental temperature and light](#temperature-and-light-experimental-readings).
@@ -12,6 +13,32 @@ or [experimental temperature and light](#temperature-and-light-experimental-read
 The driver runs on your SmartThings hub. It sends commands to the ESP32 over your
 home network; the ESP32 communicates with the motors over Bluetooth. Alexa reaches
 these devices through the **SmartThings skill and linked account**.
+
+## Multiple bridges and blind assignments
+
+Use more than one ESP32 when a single board cannot reliably reach all your motors
+over Bluetooth, such as across floors or distant rooms. Each bridge connects to
+the same reachable LAN as your hub and serves the blinds assigned to it. One
+driver installation on the hub discovers all the bridges; each bridge setup device
+needs its own board's LAN token.
+
+Enable a blind on **exactly one** bridge's setup page. The driver automatically
+routes its commands to that board. A duplicate assignment blocks routing until
+corrected. Each board can store up to ten blind records, including disabled ones;
+the current importer does not accept a backup with more than ten records.
+
+When reassigning a blind, disable it on its old board and save, then enable it on
+the new board and save. Run SmartThings discovery again. The stable blind UUID
+lets the driver reuse the existing blind device when its bridge changes. There
+is no automatic roaming or failover if a bridge goes offline, and the ESP32s do
+not act as radio repeaters for one another.
+
+Blinds on different bridges can be used together in SmartThings routines and
+Alexa groups through SmartThings. Each board handles its own motor transactions
+serially, so group movement is not synchronized. Extra boards do not remove the
+battery cost of polling or retries. Follow the
+[multiple-bridge setup steps and example](BEGINNER_GUIDE.md#9-use-multiple-esp32-bridges-for-better-coverage)
+for placement, range scans, per-board tokens, and verification.
 
 ## Find the controls and settings
 

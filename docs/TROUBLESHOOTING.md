@@ -14,6 +14,8 @@
 | SmartThings finds nothing | Verify the hub supports LAN Edge, the channel driver was installed, and hub/ESP share a LAN with multicast/mDNS allowed. Guest Wi-Fi and separate VLANs commonly prevent discovery. |
 | Devices appear but controls fail | Put the correct LAN token in the matching bridge setup device. Leave the ESP powered and close the original app. Use one blind assignment per board. |
 | Duplicate assignment warning | Disable that blind on all but one board and save. Run discovery again. The driver deliberately blocks ambiguous routing. |
+| One bridge cannot reach blinds in distant rooms | Add a bridge near that group or improve placement, with both Wi-Fi and Bluetooth coverage. All bridges use the same driver; assign each blind to exactly one board. See the [multiple-bridge guide](BEGINNER_GUIDE.md#9-use-multiple-esp32-bridges-for-better-coverage). |
+| A bridge is offline and another bridge is nearby | There is no automatic failover. Restore the original bridge or deliberately change the assignments and rerun discovery. |
 | A command is accepted but nothing moves | Move the board nearer, charge the motor, and close the original app. Acceptance means queued work; it does not prove successful Bluetooth delivery or physical movement. |
 | Battery updates but position does not | Refresh once, allow Bluetooth work to finish, and compare with the original app after the connection is released. The firmware bounds automatic startup work so a motor cannot retry indefinitely. Do not rely on unlimited retries. |
 | Position looks reversed | The percentage represents tilt through both closed directions. Default flat/open is 50%. Adjust Open/Close presets to suit your installation. |

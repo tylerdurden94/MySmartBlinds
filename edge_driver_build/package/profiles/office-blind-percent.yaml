@@ -1,0 +1,256 @@
+{
+  "name": "msb-office-blind.v6",
+  "components": [
+    {
+      "id": "main",
+      "capabilities": [
+        {
+          "id": "windowShadeLevel",
+          "version": 1
+        },
+        {
+          "id": "windowShade",
+          "version": 1
+        },
+        {
+          "id": "switch",
+          "version": 1
+        },
+        {
+          "id": "battery",
+          "version": 1
+        },
+        {
+          "id": "travelagain19498.mysmartblindsSensorStatus",
+          "version": 1
+        },
+        {
+          "id": "temperatureMeasurement",
+          "version": 1
+        },
+        {
+          "id": "illuminanceMeasurement",
+          "version": 1
+        },
+        {
+          "id": "travelagain19498.mysmartblindsTemperatures",
+          "version": 1
+        },
+        {
+          "id": "travelagain19498.mysmartblindsLightMeter",
+          "version": 1
+        },
+        {
+          "id": "travelagain19498.mysmartblindsLightLevel",
+          "version": 1
+        },
+        {
+          "id": "travelagain19498.mysmartblindsRawTelemetry",
+          "version": 1
+        },
+        {
+          "id": "travelagain19498.mysmartblindsTiltPosition",
+          "version": 1
+        },
+        {
+          "id": "travelagain19498.mysmartblindsTiltControl",
+          "version": 1
+        },
+        {
+          "id": "refresh",
+          "version": 1
+        }
+      ],
+      "categories": [
+        {
+          "name": "Blind"
+        }
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "bridgeToken",
+      "title": "Bridge token",
+      "description": "Token stored under AppData Local MySmartBlinds",
+      "required": false,
+      "preferenceType": "string",
+      "definition": {
+        "stringType": "password",
+        "minLength": 0,
+        "maxLength": 128,
+        "default": ""
+      }
+    },
+    {
+      "name": "onPosition",
+      "title": "Open position (%)",
+      "description": "Open goes to this tilt. 50% is flat/open; 0% and 100% tilt closed in opposite directions.",
+      "required": false,
+      "preferenceType": "integer",
+      "definition": {
+        "minimum": 0,
+        "maximum": 100,
+        "default": 50
+      }
+    },
+    {
+      "name": "offPosition",
+      "title": "Close position (%)",
+      "description": "Close goes to this tilt. Choose a different position from Open; 0% and 100% are opposite closed tilts.",
+      "required": false,
+      "preferenceType": "integer",
+      "definition": {
+        "minimum": 0,
+        "maximum": 100,
+        "default": 0
+      }
+    },
+    {
+      "name": "openCloseRetries",
+      "title": "Open/Close retries",
+      "description": "Extra Open/Close attempts (0 = off). Uses all attempts even without fresh position feedback. Stops when confirmed; accepts 3% from closed endpoints. No periodic checks.",
+      "required": false,
+      "preferenceType": "integer",
+      "definition": {
+        "minimum": 0,
+        "maximum": 15,
+        "default": 0
+      }
+    },
+    {
+      "name": "positionPollMinutes",
+      "title": "Position check interval",
+      "description": "How often this blind wakes for a position read. Off keeps the last known position until a command or manual Refresh.",
+      "required": false,
+      "preferenceType": "enumeration",
+      "definition": {
+        "options": {
+          "0": "Off",
+          "1": "1 minute",
+          "2": "2 minutes",
+          "5": "5 minutes",
+          "10": "10 minutes",
+          "15": "15 minutes",
+          "30": "30 minutes"
+        },
+        "default": "2"
+      }
+    },
+    {
+      "name": "showDiagnostics",
+      "title": "Show raw diagnostics",
+      "description": "Show native tilt and raw sensor readings in the device panel. Reopen the panel after changing.",
+      "required": false,
+      "preferenceType": "boolean",
+      "definition": {
+        "default": false
+      }
+    },
+    {
+      "name": "temperatureScale",
+      "title": "Temperature conversion",
+      "description": "Confirm at another temperature before selecting Confirmed.",
+      "required": false,
+      "preferenceType": "enumeration",
+      "definition": {
+        "options": {
+          "unverified": "Unverified: hide temperatures",
+          "deciCTrial": "Provisional: raw / 10 degrees C",
+          "deciC": "Confirmed: raw / 10 degrees C"
+        },
+        "default": "unverified"
+      }
+    },
+    {
+      "name": "interiorOffset",
+      "title": "Interior temperature correction (C)",
+      "description": "Added after conversion. This measures inside the motor, not room air.",
+      "required": false,
+      "preferenceType": "number",
+      "definition": {
+        "minimum": -50,
+        "maximum": 50,
+        "default": 0
+      }
+    },
+    {
+      "name": "batteryOffset",
+      "title": "Battery temperature correction (C)",
+      "description": "Added after conversion to Celsius.",
+      "required": false,
+      "preferenceType": "number",
+      "definition": {
+        "minimum": -50,
+        "maximum": 50,
+        "default": 0
+      }
+    },
+    {
+      "name": "temperatureUnit",
+      "title": "Temperature display unit",
+      "description": "Display unit for both temperature readings after their conversion is confirmed.",
+      "required": false,
+      "preferenceType": "enumeration",
+      "definition": {
+        "options": {
+          "F": "Fahrenheit",
+          "C": "Celsius"
+        },
+        "default": "F"
+      }
+    },
+    {
+      "name": "lightGraphMax",
+      "title": "Light graph maximum",
+      "description": "Upper end of the relative light bar in sensor units. This sets the display scale, not a lux conversion.",
+      "required": false,
+      "preferenceType": "integer",
+      "definition": {
+        "minimum": 1,
+        "maximum": 32767,
+        "default": 1000
+      }
+    },
+    {
+      "name": "lightGraphBaseline",
+      "title": "Light graph baseline",
+      "description": "Lower reference for the relative light bar. A nighttime baseline does not establish zero lux.",
+      "required": false,
+      "preferenceType": "integer",
+      "definition": {
+        "minimum": 0,
+        "maximum": 32766,
+        "default": 0
+      }
+    },
+    {
+      "name": "luxPerCount",
+      "title": "Light calibration: lux per count",
+      "description": "0 disables lux. Set only with a verified linear calibration against a light meter.",
+      "required": false,
+      "preferenceType": "number",
+      "definition": {
+        "minimum": 0,
+        "maximum": 10000,
+        "default": 0
+      }
+    },
+    {
+      "name": "lightDarkOffset",
+      "title": "Light calibration: dark raw value",
+      "description": "Estimated lux = (raw light - this value) x lux per count.",
+      "required": false,
+      "preferenceType": "integer",
+      "definition": {
+        "minimum": -32768,
+        "maximum": 32767,
+        "default": 0
+      }
+    }
+  ],
+  "metadata": {
+    "vid": "7e9f72df-880c-3489-8476-5d8eba8bec0b",
+    "mnmn": "SmartThingsCommunity"
+  }
+}

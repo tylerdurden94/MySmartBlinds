@@ -1,0 +1,25 @@
+name: msb-office-blind.v1
+components:
+  - id: main
+    capabilities:
+      - id: travelagain19498.mysmartblindsTiltPosition
+        version: 1
+      - id: battery
+        version: 1
+      - id: travelagain19498.mysmartblindsRawTelemetry
+        version: 1
+      - id: refresh
+        version: 1
+    categories:
+      - name: Blind
+preferences:
+  - title: Bridge token
+    name: bridgeToken
+    description: Token stored under AppData Local MySmartBlinds
+    required: false
+    preferenceType: string
+    definition:
+      stringType: password
+      minLength: 0
+      maxLength: 128
+      default: ""

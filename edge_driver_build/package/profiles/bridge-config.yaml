@@ -1,0 +1,34 @@
+{
+  "name": "msb-bridge-config.v1",
+  "components": [
+    {
+      "id": "main",
+      "capabilities": [
+        {
+          "id": "refresh",
+          "version": 1
+        }
+      ],
+      "categories": [
+        {
+          "name": "Bridges"
+        }
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "bridgeToken",
+      "title": "Bridge token",
+      "description": "LAN token for this ESP32; its assigned blinds use this token automatically.",
+      "required": false,
+      "preferenceType": "string",
+      "definition": {
+        "stringType": "password",
+        "minLength": 0,
+        "maxLength": 128,
+        "default": ""
+      }
+    }
+  ]
+}

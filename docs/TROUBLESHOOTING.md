@@ -18,7 +18,9 @@
 | Battery updates but position does not | Refresh once, allow Bluetooth work to finish, and compare with the original app after the connection is released. The firmware bounds automatic startup work so a motor cannot retry indefinitely. Do not rely on unlimited retries. |
 | Position looks reversed | The percentage represents tilt through both closed directions. Default flat/open is 50%. Adjust Open/Close presets to suit your installation. |
 | Manual changes are slow to appear | Check Position check interval. Off requires manual refresh. Group requests are processed serially and can delay sensor reads. |
-| Light/temperature looks wrong | Raw light is not lux. Temperature scaling is unverified until you calibrate it. Leave physical-unit conversion disabled without your own measurements. |
+| Motor battery drains faster after setup | Frequent position polling adds Bluetooth activity. Extra movement retries add motor activity and confirmation reads. Try polling Off or a longer interval, and use the lowest useful retry limit. See the [driver guide](SMARTTHINGS_DRIVER_GUIDE.md). |
+| Motor sometimes stops short on Open/Close | A small Open/Close retries limit can give an intermittently failing motor another chance at the same target. It cannot repair a mechanism or detect misaligned slats if the motor reports success. See the [retry explanation](SMARTTHINGS_DRIVER_GUIDE.md#openclose-retries-helping-motors-that-intermittently-stop-short). |
+| Light/temperature looks wrong | Physical-unit conversions are tentative and not confirmed accurate. Raw light is not lux. Leave conversions disabled without your own measurements; choosing Confirmed does not calibrate anything. See the [sensor limitations](SMARTTHINGS_DRIVER_GUIDE.md#temperature-and-light-experimental-readings). |
 | Old target remains on screen briefly | The driver confirms commands asynchronously and then reconciles with measured values. Slow Bluetooth connections and optional retries extend this period. |
 
 ## Recover setup access

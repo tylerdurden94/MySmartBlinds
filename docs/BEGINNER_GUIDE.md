@@ -135,6 +135,10 @@ describes invitation acceptance, hub enrollment, and driver installation.
 
 ## 8. Test and customize one blind
 
+Read the [SmartThings driver features and settings guide](SMARTTHINGS_DRIVER_GUIDE.md)
+for every setting, polling's battery tradeoff, and retries for motors that
+intermittently stop short. Temperature and light conversion remain experimental.
+
 1. Watch the blind while testing. Move the slider to **50%**: its slats should
    become approximately flat/open. **0% and 100% are opposite closed directions.**
 2. Use **Open** and **Close**. Defaults are Open 50%, Close 0%. Adjust **Open
@@ -142,12 +146,18 @@ describes invitation acceptance, hub enrollment, and driver installation.
 3. Pull down to refresh and check that the measured position and battery update.
    An accepted request is not proof the motor moved; verify it physically.
 4. Leave **Open/Close retries** at **0** initially. Higher settings permit extra
-   movements and can take several minutes; they cannot fix a slipping mechanism.
+   movements and can take several minutes. A small limit can help a motor that
+   intermittently stops short, but it cannot repair a mechanical fault. The driver
+   uses reported motor position, which may not reveal a slipping linkage.
 5. Choose **Position check interval**. Default is 2 minutes. **Off** stops routine
    checks after bounded startup work; commands and manual Refresh still work.
-   Polling adds Bluetooth traffic and can affect battery life.
-6. Leave temperature conversion disabled and lux calibration at zero until
-   measured against suitable reference instruments. Raw light is not lux.
+   Polling uses additional Bluetooth communication and may reduce motor battery
+   life. Consider Off if you mainly issue SmartThings/Alexa commands; enable it
+   when you need updates from other control methods or fresh sensor readings.
+6. Temperature and light interpretation are tentative and have not been confirmed
+   accurate. Leave temperature conversion disabled and lux calibration at zero
+   until checked against suitable reference instruments. Raw light is not lux,
+   and selecting Confirmed does not validate a temperature conversion.
 7. Add your remaining blinds in the setup page, then run SmartThings discovery
    again. Each blind becomes a separate device for routines. Correct display
    names manually if SmartThings adds a numeric suffix.

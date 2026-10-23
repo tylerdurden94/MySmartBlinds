@@ -4,7 +4,7 @@
 
 | Option | Who it serves | What users do |
 | --- | --- | --- |
-| Public GitHub source | Developers and anyone wanting to inspect/change the code | Download/build ESP1 firmware; advanced users package their own driver |
+| Public GitHub source | Developers and anyone wanting to inspect/change the code | Download/build ESP32 firmware; advanced users package their own driver |
 | Community Edge channel (recommended) | Ordinary SmartThings users | Open an invitation, enroll their hub, install the driver, then scan nearby |
 | Separate beta channel | Volunteers testing updates | Explicitly enroll a test hub in the beta channel |
 | Official SmartThings catalog | A supported product seeking platform certification | Complete Works with SmartThings certification and publication requirements |
@@ -15,9 +15,8 @@ separate actions. Channel users do not need developer tools or their own custom
 capability namespace.
 
 Use a dedicated **MySmartBlinds Community** channel containing only this driver.
-Keep the owner's existing private channel separate. A channel invitation grants
-access to the drivers on that channel, so do not share a channel containing
-unrelated private drivers. Add a beta channel later if desired.
+A channel invitation grants access to the drivers on that channel, so keep its
+contents relevant to this project. Add a beta channel later if desired.
 
 The official [Driver Channels guide](https://developer.smartthings.com/docs/devices/hub-connected/driver-channels)
 documents packaging, assigning a specific version, and invitations. The
@@ -27,9 +26,8 @@ catalog publication or imply certification.
 
 ## 1. Verify a clean release
 
-Publish only this repository's contents. Do not initialize a public repository in
-the parent private workspace or copy that workspace's history. It contains
-unrelated firmware and household diagnostics.
+Publish a clean source tree. Keep credentials, app backups, and household
+diagnostics outside the public repository and its history.
 
 ```text
 python -m pip install -r requirements-dev.txt
@@ -41,15 +39,15 @@ pio run -d esp_bridge
 The firmware host tests require a C++17 `g++` compiler. Alternatively use
 `python esp_bridge/test_firmware.py --zig /path/to/zig`.
 Inspect the file inventory for backups, tokens, configured flash dumps, logs,
-and personal paths. `esp_bridge/src/main.cpp` should match the standalone ESP1
-source. Review the MIT license before publishing under a different owner.
+and personal paths. Verify the firmware source matches the tested implementation.
+Review the MIT license before publishing under a different owner.
 
 ## 2. Publish GitHub source
 
 Create a public repository named **MySmartBlinds** under **TylerDurden94**. The
 public root must contain README.md, esp_bridge/, edge_driver_template/,
 edge_driver_build/, and docs/ directly. Commit only this clean snapshot.
-Do not publish the parent's diagnostics, ESP2, migration tools, or app backups.
+Do not publish household diagnostics, configured-device images, or app backups.
 
 After confirming the public files render correctly, tag a beta source release
 such as `v0.1.0`. A GitHub release automatically offers source archives. If you
@@ -79,8 +77,8 @@ smartthings edge:drivers:package edge_driver_build/package
 
 The first CLI command builds a local ZIP without uploading it. The second uploads
 and returns the public driver's **driverId** and **version**. Record both.
-The public `packageKey` is `tylerdurden94.msb.espbridge`; it is separate
-from the private pilot's package key. Do not replace it with the pilot key.
+The public `packageKey` is `tylerdurden94.msb.espbridge`. Keep it stable when
+updating this driver so SmartThings can identify later package versions.
 
 ## 4. Create a dedicated community channel
 
@@ -173,5 +171,5 @@ GitHub copy of a schema alone does not make that capability exist in SmartThings
 Record source tag, firmware identifier, driver version, channel assignment, test
 results, and limitations in release notes. Test updates through a beta channel
 before promoting to community. Keep a prior known-good package and version
-available for rollback. Make no changes to the owner's installed devices merely
-to publish source; private pilot migration is a separate task.
+available for rollback. Document user-visible changes and any migration steps
+before promoting a driver update to the community channel.

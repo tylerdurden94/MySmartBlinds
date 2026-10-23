@@ -2,8 +2,8 @@
 
 Checks performed on the clean source snapshot on 2026-10-23:
 
-- The standalone ESP1 `src/main.cpp` and storage layout match the private ESP1
-  source byte for byte. ESP2 and its additional application were not copied.
+- The published firmware source and storage layout were verified against the
+  tested bridge implementation.
 - All 52 existing Lua driver tests passed against the public driver source.
 - All 21 existing firmware lifecycle scenarios passed using the host radio
   simulation and Zig 0.13.0 as the C++ compiler.

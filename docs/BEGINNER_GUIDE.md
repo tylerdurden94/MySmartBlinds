@@ -4,6 +4,11 @@ Follow these steps in order. Start with one board and one blind; add more after
 that blind works. A **firmware upload** installs the program on the ESP32. An
 **Edge driver** installs on your SmartThings hub. You need both.
 
+The bridge connects your existing blind motors to SmartThings without the
+retired MySmartBlinds cloud bridge. SmartThings provides remote app access and,
+when linked to Alexa, the route for voice commands. The ESP32 does not connect
+directly to Alexa.
+
 ## 1. Check the equipment
 
 Use the equipment listed in the [README](../README.md). The validated board
@@ -147,8 +152,35 @@ describes invitation acceptance, hub enrollment, and driver installation.
    again. Each blind becomes a separate device for routines. Correct display
    names manually if SmartThings adds a numeric suffix.
 
-Once SmartThings control works, you can use normal SmartThings routines. Voice
-assistant behavior depends on your existing SmartThings/assistant integration.
+Once SmartThings control works, you can use normal SmartThings routines.
+
+## Use remote control and Alexa
+
+First verify that each blind moves from its device page in SmartThings. The
+ESP32 and SmartThings hub must stay powered and connected to your home network.
+
+For **remote access**, leave the hub connected to the internet. On your phone,
+turn off Wi-Fi to use mobile data, open SmartThings, and test a blind. This
+checks the SmartThings remote-control route rather than the original
+MySmartBlinds app or retired bridge.
+
+For **Alexa**, the route is Alexa → SmartThings → your hub's Edge driver →
+ESP32 → blind. Link the accounts after SmartThings control works:
+
+1. Open the Alexa app and find the **SmartThings** skill under Skills & Games.
+2. Enable it and sign in to the Samsung account that owns your SmartThings home.
+   Follow the account-linking and device-access prompts.
+3. Run Alexa device discovery and look for the blinds added through SmartThings.
+4. Give each blind a clear name in Alexa. Test an Open/Close command for one
+   blind before adding it to Alexa groups or routines. Available voice commands
+   depend on the device controls Alexa exposes through SmartThings.
+5. If an old MySmartBlinds device still appears in Alexa, make sure your test
+   targets the newly discovered SmartThings device; review duplicate device names.
+
+See [Samsung's current Alexa linking instructions](https://www.samsung.com/us/support/answer/ANS10006871/)
+if app wording differs. Use the SmartThings skill for this solution. Remote
+access and Alexa need internet service; local Bluetooth communication between
+the ESP32 and motors does not restore the retired manufacturer's cloud service.
 
 ## 9. Add another standalone bridge, if needed
 
@@ -156,7 +188,6 @@ Flash another board with this same firmware, set up its Wi-Fi, save its own toke
 and import the same backup. Assign each blind to **exactly one** board, choosing
 the board with reliable coverage. Install the driver once per hub; discovery
 finds the additional bridge. Enter that bridge's token in its setup device.
-This does not require the private ESP2/SurgeArrest application.
 
 ## Optional: USB provisioning instead of web import
 

@@ -1,16 +1,73 @@
-# MySmartBlinds ESP32 bridge for SmartThings
+# Bring MySmartBlinds back to SmartThings and Alexa
 
-Control first-generation MySmartBlinds Bluetooth tilt motors from SmartThings
-using an ESP32 and a local SmartThings Edge driver. The ESP32 talks to the motors
-over Bluetooth and to your hub over your home network. The original MySmartBlinds
-cloud bridge is not required for this connection.
+Restore control of first-generation MySmartBlinds Bluetooth tilt motors with an
+ESP32 bridge and a SmartThings hub. Control your blinds from SmartThings at home
+or away, include them in routines, and use Alexa **through the SmartThings skill**.
+
+## Why this project exists
+
+MySmartBlinds ended its cloud support. The original MySmartBlinds Bridge devices
+depended on that service for remote access and Alexa integration, leaving owners
+with working blind motors but no working cloud bridge for those features. The
+Android app's [release notes](https://play.google.com/store/apps/details?id=com.mysmartblinds2.android)
+describe its move to offline operation and the addition of backup export/import.
+Nearby Bluetooth control through the original app is separate from the lost
+cloud bridge features.
+
+This project provides a new path from those existing motors to SmartThings.
+Install the firmware on an ESP32 and the supplied Edge driver on a compatible
+SmartThings hub. The ESP32 communicates with the blinds over Bluetooth; the
+driver on the hub communicates with the ESP32 over your home network. The
+retired MySmartBlinds cloud service and original bridge are no longer part of
+that control path.
+
+## How SmartThings restores remote and Alexa control
+
+**SmartThings is the connection between this bridge and Alexa.** This project
+does not connect directly to Alexa or revive the old MySmartBlinds Alexa skill.
+
+```text
+Alexa voice request
+  -> SmartThings skill and linked Samsung account
+  -> SmartThings hub running this project's Edge driver
+  -> ESP32 over your home network
+  -> MySmartBlinds motor over Bluetooth
+```
+
+Once a blind works in SmartThings, link SmartThings to Alexa using the
+**SmartThings skill** and discover the devices in Alexa. Alexa can then control
+the blinds exposed by SmartThings and include them in Alexa groups or routines.
+See [Samsung's SmartThings/Alexa setup guide](https://www.samsung.com/us/support/answer/ANS10006871/)
+and the [beginner guide](docs/BEGINNER_GUIDE.md#use-remote-control-and-alexa).
+
+For control away from home, use the SmartThings app with your hub online.
+Communication from the hub to the motors stays local, while remote app access
+and Alexa depend on internet access and the SmartThings/Amazon services. You
+still need a compatible SmartThings hub; the ESP32 alone does not provide
+Alexa integration or remote access.
+
+## What you gain
+
+| Function | What this solution provides |
+| --- | --- |
+| Remote access | Control existing blinds away from home through SmartThings |
+| Alexa voice control | Control through Alexa's SmartThings skill after linking accounts and discovering the blinds |
+| Smart home routines | Combine blind control with schedules, scenes, sensors, and other devices supported by SmartThings |
+| Individual blind control | A separate SmartThings device for each blind, with adjustable Open/Close presets and a tilt slider |
+| Battery and charging information | Battery level and solar/USB charging state alongside the controls |
+| Flexible coverage | Use multiple ESP32 bridges, assigning each blind to the bridge with suitable Bluetooth coverage |
+| Configurable feedback | Choose a position polling interval or request a reading manually |
+| Optional retries | Configure extra Open/Close attempts when a motor misses its target; disabled by default |
+| Open source maintenance | Inspect, modify, and build the bridge firmware and driver without relying on the retired manufacturer's cloud |
+
+Beyond recovering remote and voice control, this makes the blinds part of your
+broader SmartThings home, with per-blind settings and useful sensor information.
+It reuses the existing motors; it does not require replacing the blind hardware.
 
 **Start here: [step-by-step beginner guide](docs/BEGINNER_GUIDE.md).**
 
-This repository contains the standalone **ESP1** firmware and its matching Edge
-driver. There is no ESP2 firmware or SurgeArrest control in this release. You can
-use multiple boards running this same standalone firmware, assigning each blind
-to one board. Up to ten blind records are supported per board.
+This repository contains the ESP32 bridge firmware and its matching SmartThings
+Edge driver. Up to ten blind records are supported per bridge.
 
 ## Before you start
 
@@ -51,7 +108,7 @@ Motors are contacted serially, so group commands are not simultaneous.
 
 | Folder | Contents |
 | --- | --- |
-| `esp_bridge` | Standalone ESP1 firmware, optional provisioning helpers, firmware tests |
+| `esp_bridge` | ESP32 bridge firmware, optional provisioning helpers, firmware tests |
 | `edge_driver_template` | Editable Edge source, capability definitions, package generator, driver tests |
 | `edge_driver_build` | Generated driver package and UI definitions using the maintainer's registered namespace |
 | `docs` | Beginner installation, troubleshooting, and maintainer publishing instructions |

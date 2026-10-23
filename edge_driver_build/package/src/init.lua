@@ -87,7 +87,7 @@ local function request(ip, port, path, method, token)
         return settimeout(self, HTTP_TIMEOUT_SECONDS, mode)
       end
       socket:settimeout(HTTP_TIMEOUT_SECONDS)
-      -- LuaSocket sends the request line and headers separately. ESP1 can
+      -- LuaSocket sends the request line and headers separately. The bridge can
       -- prematurely finish parsing a fragmented request, then reject the
       -- missing token. Submit the complete header block in one socket write.
       local send = socket.send

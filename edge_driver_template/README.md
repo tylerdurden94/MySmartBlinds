@@ -1,7 +1,7 @@
 # SmartThings Edge source
 
-Novice users should use the community channel link in the root README once
-published. Maintainers should read [PUBLISHING.md](../docs/PUBLISHING.md).
+Novice users should use the community channel link in the root README.
+Maintainers should read [PUBLISHING.md](../docs/PUBLISHING.md).
 
 The ready package is `../edge_driver_build/package`. Its custom capabilities use
 the maintainer's registered namespace `travelagain19498`; this identifier is
@@ -14,11 +14,10 @@ Regenerate the package and UI definitions from the repository root:
 python edge_driver_template/prepare_driver.py travelagain19498
 ```
 
-The public package key is `tylerdurden94.msb.espbridge`, separate from
-the private development driver. The legacy pilot's personal blind UUID has been
-replaced with a synthetic value in the public source. New installations use the
-UUIDs imported by their own bridge. Do not use this snapshot as an automatic
-migration of the maintainer's private pilot devices.
+The package key is `tylerdurden94.msb.espbridge`. Each installation uses the
+blind UUIDs imported into its own bridge. The driver runs on your SmartThings
+hub and exposes those blinds to SmartThings; Alexa reaches them through the
+separate SmartThings skill and account link.
 
 Tests run the real Lua source against mocked SmartThings and LAN responses:
 

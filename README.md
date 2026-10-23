@@ -110,12 +110,18 @@ Guest network isolation can prevent discovery. No port forwarding is needed.
 
 ## Install the SmartThings driver
 
-**[Install from the MySmartBlinds Community channel](https://bestow-regional.api.smartthings.com/invite/gV2qaXZ9de29).**
+**[Install from TylerDurden94’s Edge Drivers](https://bestow-regional.api.smartthings.com/invite/oDM8Q4Bkgp2L).**
 The source and prepared driver package are also included for advanced installation;
 see [publishing and build instructions](docs/PUBLISHING.md).
 
-Users accept the invitation, enroll their hub, and install
-**MySmartBlinds ESP Bridge**. They then scan for devices in SmartThings and put
+This shared channel can contain several projects. Users accept the invitation,
+enroll their hub, and select **MySmartBlinds ESP Bridge** under Available Drivers.
+Enrollment does not install every driver. The channel was previously named
+MySmartBlinds Community. The link above shows the new branding; the original
+invitation remains active. Existing users do not need to enroll again because
+of the rename.
+
+Users then scan for devices in SmartThings and put
 their own ESP32 token into the discovered bridge device's Settings.
 
 ## What it supports

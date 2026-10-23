@@ -1,5 +1,14 @@
 # Release notes
 
+## Documentation and channel update - 2026-10-23
+
+- Renamed the existing public channel to **TylerDurden94’s Edge Drivers** so it
+  can serve multiple projects. The channel ID and MySmartBlinds driver's
+  identity and assigned version remain unchanged. A new branded invitation is
+  published, and the original invitation remains active.
+- Updated setup and maintainer instructions to select **MySmartBlinds ESP
+  Bridge** from the shared channel. Existing users need no reinstall for the rename.
+
 ## v0.1.0 - 2026-10-23
 
 Initial community source snapshot for first-generation MySmartBlinds tilt motors.
@@ -8,7 +17,8 @@ Initial community source snapshot for first-generation MySmartBlinds tilt motors
 - Matching Edge source with the October 21 bounded Open/Close retry handling.
 - SmartThings driver package and registered capability presentations.
 - Beginner installation, troubleshooting, local API, and publishing guides.
-- Dedicated MySmartBlinds Community channel with an enrollment invitation.
+- Community channel with an enrollment invitation, initially named MySmartBlinds
+  Community and subsequently renamed TylerDurden94’s Edge Drivers.
 - Generic setup paths and runtime provisioning of each user's own blinds.
 - No configured flash images, household logs, motor inventories, backups, or tokens.
 

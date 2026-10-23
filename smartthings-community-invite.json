@@ -1,0 +1,15 @@
+{
+  "resource": {
+    "root": { "service": "developer" },
+    "components": [
+      { "kind": "channel", "id": "36c02108-d699-4e4b-bed9-d019f5d3af9a" }
+    ]
+  },
+  "profileId": "61a79569-e8fd-4a4d-9b9c-a4a55ccdd15e",
+  "metadata": {
+    "name": "TylerDurden94’s Edge Drivers",
+    "description": "Community SmartThings Edge drivers by TylerDurden94. Enroll your hub, then install only the drivers you need. Source and project instructions: https://github.com/TylerDurden94",
+    "owner": "TylerDurden94",
+    "termsUrl": "https://github.com/TylerDurden94/MySmartBlinds/blob/main/LICENSE"
+  }
+}

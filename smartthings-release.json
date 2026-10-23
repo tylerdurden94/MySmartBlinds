@@ -1,10 +1,11 @@
 {
-  "channelName": "MySmartBlinds Community",
+  "channelName": "TylerDurden94’s Edge Drivers",
   "channelId": "36c02108-d699-4e4b-bed9-d019f5d3af9a",
   "driverId": "49755c8c-b729-4b9a-8a82-ea2483c868a1",
   "driverVersion": "2026-10-23T16:43:17.570795955",
   "packageKey": "tylerdurden94.msb.espbridge",
-  "invitationUrl": "https://bestow-regional.api.smartthings.com/invite/gV2qaXZ9de29",
+  "invitationUrl": "https://bestow-regional.api.smartthings.com/invite/oDM8Q4Bkgp2L",
   "firmwareVersion": "multi-bridge-2026-10-17-31-bounded-startup",
-  "sourceRelease": "v0.1.0"
+  "sourceRelease": "v0.1.0",
+  "legacyInvitationUrl": "https://bestow-regional.api.smartthings.com/invite/gV2qaXZ9de29"
 }

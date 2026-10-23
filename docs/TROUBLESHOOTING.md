@@ -8,6 +8,7 @@
 | No MSB-Setup network | Allow ten seconds after boot. A configured board may already be on home Wi-Fi. After normal startup, hold BOOT for five seconds to enable setup; do not hold it during power-on unless uploading. |
 | Setup page does not open | On the setup network use `http://192.168.4.1/setup`. On home Wi-Fi use the board's own IP or `.local` name. Disable a VPN temporarily if it blocks local access. |
 | Board cannot join Wi-Fi | Confirm 2.4 GHz availability, SSID, and password. Use setup recovery after startup to correct them. Guest isolation can prevent LAN use even when Wi-Fi connects. |
+| WROOM-32U/32UE uploads but Wi-Fi or Bluetooth is weak | Check the correct external 2.4 GHz antenna is fitted and seated; it serves both radios. Test near one motor with reliable USB power. See the [hardware compatibility guide](HARDWARE_COMPATIBILITY.md). |
 | Token was not saved | The token is only displayed during first-time network setup. Check your private USB token file if you used USB provisioning. A configured bridge does not expose the token through its public API. Seek recovery help before erasing saved configuration. |
 | Backup import fails | Use the original Android JSON export; do not edit encoded fields. The importer supports 1–10 unique blind records. Export formats from other versions/platforms may differ. |
 | No blinds after import | Reload the setup page, check Enabled here for the desired blind, save, then rescan in SmartThings. Importing the inventory alone does not enable blinds. |

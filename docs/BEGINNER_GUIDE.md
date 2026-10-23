@@ -17,7 +17,16 @@ follow the written recommendations. See [image details](screenshots/README.md).
 ## 1. Check the equipment
 
 Use the equipment listed in the [README](../README.md). The validated board
-family is the classic ESP32-WROOM-32/32D development board. This guide uses
+family is the classic ESP32-WROOM-32/32D development board. **ESP32-WROOM-32U
+USB development boards are expected to work with the same firmware**, but have
+not been physically validated here and require the correct external 2.4 GHz
+antenna. Attach it before powering the board. Keep the supplied `esp32dev`
+configuration; the `esp32-wroom-32d` task name is only an environment label.
+
+Read the [hardware compatibility and step-by-step 32U guide](HARDWARE_COMPATIBILITY.md)
+for board identification, antenna requirements, other classic WROOM variants,
+and variants that the supplied build does not support. A bare WROOM module is
+not a complete USB development board. This guide uses
 Windows and Visual Studio Code with PlatformIO. The PlatformIO project can also
 be built on macOS/Linux, but the USB port names and driver steps differ.
 

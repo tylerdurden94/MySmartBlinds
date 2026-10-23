@@ -1,8 +1,9 @@
-# Standalone ESP1 firmware
+# ESP32 bridge firmware
 
-Use the [beginner guide](../docs/BEGINNER_GUIDE.md) for installation. This is the
-standalone blinds firmware; no SurgeArrest code is included. Credentials and motor
-records are provisioned at runtime and saved on the ESP32, not compiled in.
+Use the [beginner guide](../docs/BEGINNER_GUIDE.md) for installation. This firmware
+connects MySmartBlinds Bluetooth motors to the SmartThings Edge driver over your
+home network. Credentials and motor records are provisioned at runtime and saved
+on the ESP32, not compiled in.
 
 ## Build from a command line
 

@@ -239,7 +239,7 @@ class Wizard:
                 raise InstallerError("Select the USB port on the Board tab first.")
             if not self.consent.get():
                 raise InstallerError("Review the action and check the board confirmation before starting.")
-            if mode != "setup":
+            if mode != "setup" and not self.demo:
                 validate_bundle(RESOURCES / "firmware")
             if mode != "update":
                 validate_network(self.ssid.get(), self.password.get())
@@ -408,11 +408,24 @@ def main():
         for tab in (wizard.board, wizard.settings, wizard.result):
             wizard.tabs.select(tab)
             root.update()
+        for mode in ("install", "setup", "update"):
+            wizard.mode.set(mode)
+            wizard.mode_changed()
+            wizard.consent.set(True)
+            wizard.password.set("demo-password")
+            wizard.start()
+            deadline = time.monotonic() + 10
+            while wizard.busy and time.monotonic() < deadline:
+                root.update()
+                time.sleep(0.02)
+            if wizard.busy or wizard.status.get() != "Demo finished. No hardware was accessed.":
+                raise RuntimeError("The packaged demo flow failed: " + mode)
         root.destroy()
         args.self_test.write_text(json.dumps({"status": "passed", "installer": VERSION,
             "firmware": FIRMWARE_VERSION, "os": platform.system(), "arch": platform.machine(),
             "esptool": esptool.__version__, "pyserial": serial.VERSION,
-            "gui_created": True, "firmware_hashes_verified": True, "hardware_accessed": False}, indent=2) + "\n")
+            "gui_created": True, "gui_demo_flows": ["install", "setup", "update"],
+            "firmware_hashes_verified": True, "hardware_accessed": False}, indent=2) + "\n")
         return
     root = tk.Tk()
     Wizard(root, demo=args.demo)

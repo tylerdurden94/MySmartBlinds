@@ -4,6 +4,9 @@ Restore control of first-generation MySmartBlinds Bluetooth tilt motors with an
 ESP32 bridge and a SmartThings hub. Control your blinds from SmartThings at home
 or away, include them in routines, and use Alexa **through the SmartThings skill**.
 
+**[SmartThings driver features and settings](docs/SMARTTHINGS_DRIVER_GUIDE.md)** —
+controls, polling and battery life, movement retries, and experimental sensor readings.
+
 ## Why this project exists
 
 MySmartBlinds ended its cloud support. The original MySmartBlinds Bridge devices
@@ -100,8 +103,11 @@ their own ESP32 token into the discovered bridge device's Settings.
 - Optional extra Open/Close movement attempts, disabled by default.
 - Per-blind assignment across multiple standalone ESP32 boards.
 
-Light is reported in relative sensor units. Temperature and lux conversions
-require calibration; leave them disabled until you validate them yourself.
+Polling and extra movement attempts can increase motor battery use. See the
+[driver guide](docs/SMARTTHINGS_DRIVER_GUIDE.md) for when to enable each feature.
+Temperature and light interpretation are tentative: temperature/lux conversions
+have not been confirmed accurate. Light is normally shown in relative sensor
+units. Leave conversions disabled until you validate them yourself.
 Motors are contacted serially, so group commands are not simultaneous.
 
 ## Files

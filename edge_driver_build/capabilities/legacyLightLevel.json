@@ -1,0 +1,50 @@
+{
+  "name": "MySmartBlinds Light Level",
+  "commands": {},
+  "attributes": {
+    "lightLevel": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 32767
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "sensor units"
+            ],
+            "default": "sensor units"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "lightRange": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 32767
+            }
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "MySmartBlinds Community",
+  "description": "Community ESP32 bridge driver for first-generation MySmartBlinds tilt motors. Source and setup: https://github.com/TylerDurden94/MySmartBlinds",
+  "termsOfServiceUrl": "https://github.com/TylerDurden94/MySmartBlinds/blob/main/LICENSE",
+  "type": "DRIVER"
+}

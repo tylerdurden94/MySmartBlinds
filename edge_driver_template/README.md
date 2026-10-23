@@ -1,5 +1,7 @@
 # SmartThings Edge source
 
+**For users: [driver features, settings, and battery/sensor limitations](../docs/SMARTTHINGS_DRIVER_GUIDE.md).**
+
 Novice users should use the community channel link in the root README.
 Maintainers should read [PUBLISHING.md](../docs/PUBLISHING.md).
 

@@ -1,0 +1,28 @@
+{
+  "name": "MySmartBlinds Tilt Position",
+  "attributes": {
+    "position": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {"type": "integer", "minimum": 0, "maximum": 200}
+        },
+        "additionalProperties": false,
+        "required": ["value"]
+      },
+      "setter": "setPosition"
+    }
+  },
+  "commands": {
+    "setPosition": {
+      "name": "setPosition",
+      "arguments": [
+        {
+          "name": "position",
+          "optional": false,
+          "schema": {"type": "integer", "minimum": 0, "maximum": 200}
+        }
+      ]
+    }
+  }
+}

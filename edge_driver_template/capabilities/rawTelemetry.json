@@ -1,0 +1,14 @@
+{
+  "name": "MySmartBlinds Raw Telemetry",
+  "attributes": {
+    "solarCharging": {"schema": {"type": "object", "properties": {"value": {"type": "boolean"}}, "additionalProperties": false, "required": ["value"]}},
+    "usbCharging": {"schema": {"type": "object", "properties": {"value": {"type": "boolean"}}, "additionalProperties": false, "required": ["value"]}},
+    "batteryVoltage": {"schema": {"type": "object", "properties": {"value": {"type": "integer"}}, "additionalProperties": false, "required": ["value"]}},
+    "batteryCharge": {"schema": {"type": "object", "properties": {"value": {"type": "integer"}}, "additionalProperties": false, "required": ["value"]}},
+    "solarPanelVoltage": {"schema": {"type": "object", "properties": {"value": {"type": "integer"}}, "additionalProperties": false, "required": ["value"]}},
+    "interiorTemperature": {"schema": {"type": "object", "properties": {"value": {"type": "integer"}}, "additionalProperties": false, "required": ["value"]}},
+    "batteryTemperature": {"schema": {"type": "object", "properties": {"value": {"type": "integer"}}, "additionalProperties": false, "required": ["value"]}},
+    "light": {"schema": {"type": "object", "properties": {"value": {"type": "integer"}}, "additionalProperties": false, "required": ["value"]}}
+  },
+  "commands": {}
+}

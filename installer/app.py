@@ -21,7 +21,7 @@ from core import (VERSION, FIRMWARE_VERSION, InstallerError, configure, flash,
 
 RESOURCES = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
 CHANNEL = "https://bestow-regional.api.smartthings.com/invite/oDM8Q4Bkgp2L"
-GUIDE = "https://github.com/tylerdurden94/MySmartBlinds/blob/main/docs/INSTALLER_GUIDE.md"
+GUIDE = "https://github.com/tylerdurden94/MySmartBlinds/blob/codex/usb-setup-installer/docs/INSTALLER_GUIDE.md"
 
 
 class Wizard:

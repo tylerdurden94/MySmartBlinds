@@ -1,0 +1,190 @@
+{
+  "name": "msb-office-blind.v3",
+  "components": [
+    {
+      "id": "main",
+      "capabilities": [
+        {
+          "id": "windowShadeLevel",
+          "version": 1
+        },
+        {
+          "id": "windowShade",
+          "version": 1
+        },
+        {
+          "id": "switch",
+          "version": 1
+        },
+        {
+          "id": "battery",
+          "version": 1
+        },
+        {
+          "id": "__NAMESPACE__.mysmartblindsSensorStatus",
+          "version": 1
+        },
+        {
+          "id": "temperatureMeasurement",
+          "version": 1
+        },
+        {
+          "id": "illuminanceMeasurement",
+          "version": 1
+        },
+        {
+          "id": "__NAMESPACE__.mysmartblindsRawTelemetry",
+          "version": 1
+        },
+        {
+          "id": "__NAMESPACE__.mysmartblindsTiltPosition",
+          "version": 1
+        },
+        {
+          "id": "__NAMESPACE__.mysmartblindsTiltControl",
+          "version": 1
+        },
+        {
+          "id": "refresh",
+          "version": 1
+        }
+      ],
+      "categories": [
+        {
+          "name": "Blind"
+        }
+      ]
+    },
+    {
+      "id": "batteryTemperature",
+      "label": "Battery temperature",
+      "capabilities": [
+        {
+          "id": "temperatureMeasurement",
+          "version": 1
+        }
+      ],
+      "categories": [
+        {
+          "name": "TemperatureSensor"
+        }
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "bridgeToken",
+      "title": "Bridge token",
+      "description": "Token stored under AppData Local MySmartBlinds",
+      "required": false,
+      "preferenceType": "string",
+      "definition": {
+        "stringType": "password",
+        "minLength": 0,
+        "maxLength": 128,
+        "default": ""
+      }
+    },
+    {
+      "name": "onPosition",
+      "title": "Open position (%)",
+      "description": "Open goes to this tilt. 50% is flat/open; 0% and 100% tilt closed in opposite directions.",
+      "required": false,
+      "preferenceType": "integer",
+      "definition": {
+        "minimum": 0,
+        "maximum": 100,
+        "default": 50
+      }
+    },
+    {
+      "name": "offPosition",
+      "title": "Close position (%)",
+      "description": "Close goes to this tilt. Choose a different position from Open; 0% and 100% are opposite closed tilts.",
+      "required": false,
+      "preferenceType": "integer",
+      "definition": {
+        "minimum": 0,
+        "maximum": 100,
+        "default": 0
+      }
+    },
+    {
+      "name": "showDiagnostics",
+      "title": "Show raw diagnostics",
+      "description": "Show native tilt and raw sensor readings in the device panel. Reopen the panel after changing.",
+      "required": false,
+      "preferenceType": "boolean",
+      "definition": {
+        "default": false
+      }
+    },
+    {
+      "name": "temperatureScale",
+      "title": "Temperature conversion",
+      "description": "Enable only after confirming the raw-to-Celsius scale against a reference.",
+      "required": false,
+      "preferenceType": "enumeration",
+      "definition": {
+        "options": {
+          "unverified": "Unverified: hide temperatures",
+          "deciC": "Confirmed: raw / 10 degrees C"
+        },
+        "default": "unverified"
+      }
+    },
+    {
+      "name": "interiorOffset",
+      "title": "Interior temperature correction (C)",
+      "description": "Added after conversion. This measures inside the motor, not room air.",
+      "required": false,
+      "preferenceType": "number",
+      "definition": {
+        "minimum": -50,
+        "maximum": 50,
+        "default": 0
+      }
+    },
+    {
+      "name": "batteryOffset",
+      "title": "Battery temperature correction (C)",
+      "description": "Added after conversion to Celsius.",
+      "required": false,
+      "preferenceType": "number",
+      "definition": {
+        "minimum": -50,
+        "maximum": 50,
+        "default": 0
+      }
+    },
+    {
+      "name": "luxPerCount",
+      "title": "Light calibration: lux per count",
+      "description": "0 disables lux. Set only with a verified linear calibration against a light meter.",
+      "required": false,
+      "preferenceType": "number",
+      "definition": {
+        "minimum": 0,
+        "maximum": 10000,
+        "default": 0
+      }
+    },
+    {
+      "name": "lightDarkOffset",
+      "title": "Light calibration: dark raw value",
+      "description": "Estimated lux = (raw light - this value) x lux per count.",
+      "required": false,
+      "preferenceType": "integer",
+      "definition": {
+        "minimum": -32768,
+        "maximum": 32767,
+        "default": 0
+      }
+    }
+  ],
+  "metadata": {
+    "vid": "0bd5d526-20b4-3268-9c4b-f3b7e3a3564a",
+    "mnmn": "SmartThingsCommunity"
+  }
+}
+

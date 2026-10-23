@@ -69,6 +69,9 @@ It reuses the existing motors; it does not require replacing the blind hardware.
 
 **Start here: [step-by-step beginner guide](docs/BEGINNER_GUIDE.md).**
 
+The guides include GitHub download, bridge setup, and genuine SmartThings Android
+screenshots. See the [screenshot index and example-data notes](docs/screenshots/README.md).
+
 This repository contains the ESP32 bridge firmware and its matching SmartThings
 Edge driver. Up to ten blind records are supported per bridge.
 

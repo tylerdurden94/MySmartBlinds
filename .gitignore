@@ -18,3 +18,13 @@ captures/
 diagnostics/
 .env
 .env.*
+
+installer/build/
+installer/dist/
+installer/firmware/
+installer/licenses/
+installer/third-party-source/
+installer-input/
+installer-framework/
+downloaded-firmware/
+*.spec

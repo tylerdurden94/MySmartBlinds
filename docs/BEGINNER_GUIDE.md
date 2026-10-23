@@ -1,0 +1,188 @@
+# Beginner installation guide
+
+Follow these steps in order. Start with one board and one blind; add more after
+that blind works. A **firmware upload** installs the program on the ESP32. An
+**Edge driver** installs on your SmartThings hub. You need both.
+
+## 1. Check the equipment
+
+Use the equipment listed in the [README](../README.md). The validated board
+family is the classic ESP32-WROOM-32/32D development board. This guide uses
+Windows and Visual Studio Code with PlatformIO. The PlatformIO project can also
+be built on macOS/Linux, but the USB port names and driver steps differ.
+
+Charge the blind and verify it moves with the original app. Leave its existing
+calibration in place. This project does not repair or recalibrate a motor.
+
+## 2. Export your private blind backup
+
+1. Open the MySmartBlinds **Android** app that already controls your blinds.
+2. Use its backup/export feature to save a JSON backup. The exact menu wording
+   depends on app version. The official [Android app listing](https://play.google.com/store/apps/details?id=com.mysmartblinds2.android)
+   confirms backup export/import support; this guide does not assume a specific
+   menu path. Do not reset or remove your blinds to produce the backup.
+3. Transfer the JSON file to a private folder on your computer, outside this
+   downloaded project. Keep an unchanged spare copy. Do not upload it to GitHub.
+4. You will select this file on the ESP32 setup page in step 6. The tested format
+   has `user.rooms[].blinds[]`, including `id`, `name`, `encodedMacAddress`, and
+   `encodedPasskey`. You do not have to decode or edit it.
+
+If you cannot export a compatible backup, stop here: this project cannot guess
+the motor pairing keys. iOS exports have not been validated for this importer.
+The backup is sensitive even though some fields are encoded.
+
+## 3. Download the project and install the build tool
+
+1. On the GitHub repository page, choose **Code → Download ZIP**.
+2. Right-click the ZIP and choose **Extract All**. Extract to a local folder such
+   as `C:\Projects\MySmartBlinds`. Avoid OneDrive-synced folders for development
+   tools and build files. Do not open the project from inside the ZIP.
+3. Install [Visual Studio Code](https://code.visualstudio.com/).
+4. Open Visual Studio Code, select **Extensions**, search for **PlatformIO IDE**
+   by PlatformIO, and install it. Let its setup finish, then restart the editor
+   if requested. See [PlatformIO installation help](https://docs.platformio.org/en/latest/integration/ide/vscode.html).
+5. Choose **File → Open Folder**, and open the **`esp_bridge`** folder inside
+   the extracted project. This folder contains `platformio.ini`.
+
+No Wi-Fi password or blind key belongs in the source code. The supplied firmware
+asks for those through its local setup page after installation.
+
+## 4. Upload the firmware to the ESP32
+
+1. Connect the ESP32 with a USB **data** cable. Some charging cables carry no data.
+2. Open the PlatformIO sidebar (alien-head icon). Under **Project Tasks →
+   esp32-wroom-32d → General**, select **Build**. The first build downloads
+   development tools and may take several minutes. Wait for **SUCCESS**.
+3. Select **Upload** in the same task list. If multiple boards are connected,
+   disconnect the others so there is no doubt about the upload target.
+4. If the console stays at `Connecting...`, hold **BOOT**, start Upload again,
+   and release BOOT as soon as writing begins. If necessary, briefly press EN
+   while holding BOOT to enter download mode. Release BOOT before the final reset.
+5. Wait for **SUCCESS**, then press **EN/RESET** once if the board does not restart.
+
+Do not select Erase Flash for a routine update: saved Wi-Fi and blind settings
+are intended to survive a normal upload. Do not flash this firmware onto a
+board that must retain a different application.
+
+Checkpoint: after roughly ten seconds, a new board should advertise Wi-Fi
+`MSB-Setup-xxxx`. The final four characters vary by board.
+
+## 5. Connect the ESP32 to your home Wi-Fi
+
+1. On your phone or computer, join `MSB-Setup-xxxx` with password
+   **`MySmartBlinds`**. Stay connected if warned that it has no internet.
+2. In a browser enter **`http://192.168.4.1/setup`**. Include `http://`.
+3. Choose your home **2.4 GHz** Wi-Fi name, enter its password, and select
+   **Save Wi-Fi**. Leave the optional bridge token blank to generate one.
+4. **Copy the displayed LAN token before selecting Connect to Wi-Fi now.**
+   Save it privately, for example in a password manager. SmartThings will need it.
+   The token is different from the setup Wi-Fi password.
+5. Select **Connect to Wi-Fi now**. The ESP restarts and the temporary network
+   disappears. Rejoin your home Wi-Fi on the phone/computer.
+6. Use the confirmation page's bridge setup link, or enter the shown address
+   `http://msb-xxxx.local/setup`. If `.local` does not work, find `msb-xxxx` in
+   your router's connected-device list and open `http://ITS-IP-ADDRESS/setup`.
+7. On home Wi-Fi, sign in with username **`msb`** and password
+   **`MySmartBlinds`**. These are the current firmware's shared setup credentials.
+
+Checkpoint: the setup page opens while your phone/computer is on home Wi-Fi.
+Keep the token private. Do not forward the ESP's ports through your router.
+
+## 6. Import the backup and enable one blind
+
+1. Close the original MySmartBlinds app so it releases its Bluetooth connection.
+2. Open the ESP32's `/setup` page on your trusted home Wi-Fi.
+3. Under **Import private app backup**, choose the JSON file from step 2 and
+   select **Import blinds**. The browser reads the file and sends the blind
+   records to your ESP32. The whole backup is not stored on the ESP32.
+4. Wait for the restart and reload the page. Imported blinds start disabled.
+5. Use the range scan on the setup page if needed, then check **Enabled here**
+   for one nearby blind and select **Save enabled blinds**.
+6. Keep other boards from being assigned that same blind. Later you can enable
+   additional blinds here, up to ten records total per board.
+
+Motor keys are stored on the ESP32. The setup page uses local HTTP, so perform
+the import only on a trusted network. The optional USB method below avoids
+sending motor keys over Wi-Fi.
+
+## 7. Install the SmartThings Edge driver
+
+Use the [MySmartBlinds Community invitation](https://bestow-regional.api.smartthings.com/invite/gV2qaXZ9de29).
+Downloading the source does not install a driver on your hub.
+
+1. Open the community channel invitation from the README.
+2. Sign in with the Samsung account that owns your SmartThings hub.
+3. Select **Accept**, find your hub, and select **Enroll**.
+4. Select **Available Drivers**, choose **MySmartBlinds ESP Bridge**, and
+   select **Install**. Enrollment alone does not install the driver.
+5. In the SmartThings app, select your hub's location. Choose **Add device** and
+   **Scan nearby** (wording may vary by app version). Keep the ESP32 powered on.
+6. Look for a **MySmartBlinds Bridge** setup device and your enabled blind.
+   Discovery may take time; run the scan again if needed.
+7. Open the bridge setup device → menu → **Settings** → **Bridge token**.
+   Paste the token saved in step 5 and save. Each board needs its own token.
+8. Open the blind and pull down to refresh. Allow time for the ESP to connect
+   over Bluetooth and return the reading. Reopen the device page if its layout
+   has not loaded yet.
+
+The [official channel installation guide](https://developer.smartthings.com/docs/devices/hub-connected/enroll-in-a-shared-channel)
+describes invitation acceptance, hub enrollment, and driver installation.
+
+## 8. Test and customize one blind
+
+1. Watch the blind while testing. Move the slider to **50%**: its slats should
+   become approximately flat/open. **0% and 100% are opposite closed directions.**
+2. Use **Open** and **Close**. Defaults are Open 50%, Close 0%. Adjust **Open
+   position (%)** and **Close position (%)** in that blind's Settings if needed.
+3. Pull down to refresh and check that the measured position and battery update.
+   An accepted request is not proof the motor moved; verify it physically.
+4. Leave **Open/Close retries** at **0** initially. Higher settings permit extra
+   movements and can take several minutes; they cannot fix a slipping mechanism.
+5. Choose **Position check interval**. Default is 2 minutes. **Off** stops routine
+   checks after bounded startup work; commands and manual Refresh still work.
+   Polling adds Bluetooth traffic and can affect battery life.
+6. Leave temperature conversion disabled and lux calibration at zero until
+   measured against suitable reference instruments. Raw light is not lux.
+7. Add your remaining blinds in the setup page, then run SmartThings discovery
+   again. Each blind becomes a separate device for routines. Correct display
+   names manually if SmartThings adds a numeric suffix.
+
+Once SmartThings control works, you can use normal SmartThings routines. Voice
+assistant behavior depends on your existing SmartThings/assistant integration.
+
+## 9. Add another standalone bridge, if needed
+
+Flash another board with this same firmware, set up its Wi-Fi, save its own token,
+and import the same backup. Assign each blind to **exactly one** board, choosing
+the board with reliable coverage. Install the driver once per hub; discovery
+finds the additional bridge. Enter that bridge's token in its setup device.
+This does not require the private ESP2/SurgeArrest application.
+
+## Optional: USB provisioning instead of web import
+
+This is an advanced alternative. Install Python 3.10+ from
+[python.org](https://www.python.org/downloads/), then open PowerShell in the
+extracted project root. Replace COM6 with your board's port from Windows Device
+Manager → Ports. Close serial monitors before running these commands.
+
+```powershell
+py -m pip install -r requirements-tools.txt
+py esp_bridge/configure.py --backup "$HOME\Downloads\MSB_BACKUP.json" --list
+py esp_bridge/configure.py COM6 --backup "$HOME\Downloads\MSB_BACKUP.json" --assign 1
+```
+
+The first command lists blind numbers. The second assigns blind 1 and privately
+prompts for Wi-Fi credentials. Supply your actual backup filename. Multiple
+numbers can follow `--assign`. The LAN token is saved outside the project in
+`%LOCALAPPDATA%\MySmartBlinds\bridge_token.txt` on Windows. Copy that private
+token into the SmartThings bridge device's Settings. Do not post it in an issue.
+
+For an existing configured board, `--reuse-network` keeps its Wi-Fi settings;
+it requires the same private token file. For multiple boards with different
+tokens, use a distinct `--token-file` path per board.
+
+## Problems?
+
+Use [Troubleshooting](TROUBLESHOOTING.md). When asking for help, include the board
+model, firmware version, and a description of what failed. Omit your backup,
+tokens, passwords, motor addresses, and personal device identifiers.

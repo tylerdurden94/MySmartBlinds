@@ -1,0 +1,232 @@
+{
+  "type": "profile",
+  "dashboard": {
+    "states": [
+      {
+        "component": "main",
+        "capability": "windowShade",
+        "version": 1
+      }
+    ],
+    "actions": [
+      {
+        "component": "main",
+        "capability": "windowShade",
+        "version": 1,
+        "values": [
+          {
+            "key": "{{enumCommands}}",
+            "enabledValues": [
+              "open",
+              "close"
+            ]
+          }
+        ],
+        "patch": [
+          {
+            "op": "replace",
+            "path": "/0/label",
+            "value": "Blind position"
+          }
+        ]
+      }
+    ],
+    "basicPlus": []
+  },
+  "detailView": [
+    {
+      "component": "main",
+      "capability": "windowShadeLevel",
+      "version": 1,
+      "values": [
+        {
+          "key": "shadeLevel.value",
+          "range": [
+            0,
+            100
+          ],
+          "step": 1
+        }
+      ],
+      "patch": [
+        {
+          "op": "replace",
+          "path": "/0/label",
+          "value": "Tilt (50% = flat)"
+        }
+      ]
+    },
+    {
+      "component": "main",
+      "capability": "windowShade",
+      "version": 1,
+      "values": [
+        {
+          "key": "{{enumCommands}}",
+          "enabledValues": [
+            "open",
+            "close"
+          ]
+        }
+      ],
+      "patch": [
+        {
+          "op": "replace",
+          "path": "/0/label",
+          "value": "Blind position"
+        }
+      ]
+    },
+    {
+      "component": "main",
+      "capability": "battery",
+      "version": 1
+    },
+    {
+      "component": "main",
+      "capability": "travelagain19498.mysmartblindsSensorStatus",
+      "version": 1
+    },
+    {
+      "component": "main",
+      "capability": "travelagain19498.mysmartblindsLightMeter",
+      "version": 1,
+      "values": [
+        {
+          "key": "lightLevel.value",
+          "range": [
+            0,
+            32767
+          ],
+          "step": 1
+        }
+      ]
+    },
+    {
+      "component": "main",
+      "capability": "travelagain19498.mysmartblindsTemperatures",
+      "version": 1
+    },
+    {
+      "component": "main",
+      "capability": "illuminanceMeasurement",
+      "version": 1,
+      "visibleCondition": {
+        "component": "main",
+        "capability": "travelagain19498.mysmartblindsSensorStatus",
+        "version": 1,
+        "value": "lightReady.value",
+        "operator": "EQUALS",
+        "operand": "ready",
+        "hideOnUnmatch": true
+      }
+    },
+    {
+      "component": "main",
+      "capability": "refresh",
+      "version": 1
+    },
+    {
+      "component": "main",
+      "capability": "travelagain19498.mysmartblindsRawTelemetry",
+      "version": 1
+    },
+    {
+      "component": "main",
+      "capability": "travelagain19498.mysmartblindsTiltPosition",
+      "version": 1
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "component": "main",
+        "capability": "windowShadeLevel",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "windowShade",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "battery",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "travelagain19498.mysmartblindsSensorStatus",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "temperatureMeasurement",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "travelagain19498.mysmartblindsTemperatures",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "travelagain19498.mysmartblindsLightMeter",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "travelagain19498.mysmartblindsLightLevel",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "illuminanceMeasurement",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "travelagain19498.mysmartblindsRawTelemetry",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "travelagain19498.mysmartblindsTiltPosition",
+        "version": 1
+      }
+    ],
+    "actions": [
+      {
+        "component": "main",
+        "capability": "windowShadeLevel",
+        "version": 1
+      },
+      {
+        "component": "main",
+        "capability": "windowShade",
+        "version": 1,
+        "values": [
+          {
+            "key": "{{enumCommands}}",
+            "enabledValues": [
+              "open",
+              "close"
+            ]
+          }
+        ],
+        "patch": [
+          {
+            "op": "replace",
+            "path": "/0/label",
+            "value": "Blind position"
+          }
+        ]
+      },
+      {
+        "component": "main",
+        "capability": "refresh",
+        "version": 1
+      }
+    ]
+  }
+}

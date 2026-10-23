@@ -1,0 +1,119 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "Solar charging",
+      "displayType": "state",
+      "state": {
+        "label": "{{solarCharging.value}}"
+      }
+    },
+    {
+      "label": "USB charging",
+      "displayType": "state",
+      "state": {
+        "label": "{{usbCharging.value}}"
+      }
+    },
+    {
+      "label": "Battery voltage raw",
+      "displayType": "state",
+      "state": {
+        "label": "{{batteryVoltage.value}}"
+      }
+    },
+    {
+      "label": "Battery charge raw",
+      "displayType": "state",
+      "state": {
+        "label": "{{batteryCharge.value}}"
+      }
+    },
+    {
+      "label": "Solar panel voltage raw",
+      "displayType": "state",
+      "state": {
+        "label": "{{solarPanelVoltage.value}}"
+      }
+    },
+    {
+      "label": "Interior temperature raw",
+      "displayType": "state",
+      "state": {
+        "label": "{{interiorTemperature.value}}"
+      }
+    },
+    {
+      "label": "Battery temperature raw",
+      "displayType": "state",
+      "state": {
+        "label": "{{batteryTemperature.value}}"
+      }
+    },
+    {
+      "label": "Light raw",
+      "displayType": "state",
+      "state": {
+        "label": "{{light.value}}"
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "Battery voltage raw",
+        "displayType": "numberField",
+        "numberField": {
+          "value": "batteryVoltage.value",
+          "valueType": "integer"
+        }
+      },
+      {
+        "label": "Battery charge raw",
+        "displayType": "numberField",
+        "numberField": {
+          "value": "batteryCharge.value",
+          "valueType": "integer"
+        }
+      },
+      {
+        "label": "Solar panel voltage raw",
+        "displayType": "numberField",
+        "numberField": {
+          "value": "solarPanelVoltage.value",
+          "valueType": "integer"
+        }
+      },
+      {
+        "label": "Interior temperature raw",
+        "displayType": "numberField",
+        "numberField": {
+          "value": "interiorTemperature.value",
+          "valueType": "integer"
+        }
+      },
+      {
+        "label": "Battery temperature raw",
+        "displayType": "numberField",
+        "numberField": {
+          "value": "batteryTemperature.value",
+          "valueType": "integer"
+        }
+      },
+      {
+        "label": "Light raw",
+        "displayType": "numberField",
+        "numberField": {
+          "value": "light.value",
+          "valueType": "integer"
+        }
+      }
+    ],
+    "actions": []
+  },
+  "id": "travelagain19498.mysmartblindsRawTelemetry",
+  "version": 1
+}

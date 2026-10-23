@@ -1,0 +1,47 @@
+{
+  "id": "travelagain19498.mysmartblindsTemperatures",
+  "version": 1,
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "Ambient temperature (inside motor)",
+      "displayType": "state",
+      "state": {
+        "label": "{{ambientDisplay.value}}"
+      }
+    },
+    {
+      "label": "Battery temperature",
+      "displayType": "state",
+      "state": {
+        "label": "{{batteryDisplay.value}}"
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "Ambient temperature (inside motor)",
+        "displayType": "numberField",
+        "numberField": {
+          "value": "ambientTemperature.value",
+          "valueType": "number",
+          "unit": "ambientTemperature.unit"
+        }
+      },
+      {
+        "label": "Battery temperature",
+        "displayType": "numberField",
+        "numberField": {
+          "value": "batteryTemperature.value",
+          "valueType": "number",
+          "unit": "batteryTemperature.unit"
+        }
+      }
+    ],
+    "actions": []
+  }
+}

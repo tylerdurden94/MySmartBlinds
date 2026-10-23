@@ -1,0 +1,51 @@
+{
+  "dashboard": {
+    "states": [
+      {
+        "label": "Tilt {{position.value}}/200"
+      }
+    ],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "Measured tilt",
+      "displayType": "state",
+      "state": {
+        "label": "{{position.value}}/200"
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "Tilt position",
+        "displayType": "slider",
+        "slider": {
+          "value": "position.value",
+          "range": [
+            0,
+            200
+          ],
+          "step": 1
+        }
+      }
+    ],
+    "actions": [
+      {
+        "label": "Set tilt position",
+        "displayType": "slider",
+        "slider": {
+          "command": "setPosition",
+          "range": [
+            0,
+            200
+          ],
+          "step": 1
+        }
+      }
+    ]
+  },
+  "id": "travelagain19498.mysmartblindsTiltPosition",
+  "version": 1
+}

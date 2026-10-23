@@ -1,0 +1,65 @@
+{
+  "id": "travelagain19498.mysmartblindsSensorStatus",
+  "version": 1,
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "Charging",
+      "displayType": "state",
+      "state": {
+        "label": "{{chargingSource.value}}",
+        "alternatives": [
+          {
+            "key": "none",
+            "value": "Not charging"
+          },
+          {
+            "key": "solar",
+            "value": "Solar charging"
+          },
+          {
+            "key": "usb",
+            "value": "USB charging"
+          },
+          {
+            "key": "both",
+            "value": "Solar and USB charging"
+          }
+        ]
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "Charging source",
+        "displayType": "list",
+        "list": {
+          "value": "chargingSource.value",
+          "alternatives": [
+            {
+              "key": "none",
+              "value": "Not charging"
+            },
+            {
+              "key": "solar",
+              "value": "Solar charging"
+            },
+            {
+              "key": "usb",
+              "value": "USB charging"
+            },
+            {
+              "key": "both",
+              "value": "Solar and USB charging"
+            }
+          ]
+        }
+      }
+    ],
+    "actions": []
+  }
+}

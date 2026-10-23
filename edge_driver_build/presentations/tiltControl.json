@@ -1,0 +1,40 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "Requested tilt (100 = flat)",
+      "displayType": "slider",
+      "slider": {
+        "value": "targetPosition.value",
+        "command": "setPosition",
+        "range": [
+          0,
+          200
+        ],
+        "step": 1
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [],
+    "actions": [
+      {
+        "label": "Set tilt position",
+        "displayType": "slider",
+        "slider": {
+          "command": "setPosition",
+          "range": [
+            0,
+            200
+          ],
+          "step": 1
+        }
+      }
+    ]
+  },
+  "id": "travelagain19498.mysmartblindsTiltControl",
+  "version": 1
+}

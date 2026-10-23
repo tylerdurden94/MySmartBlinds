@@ -1,0 +1,42 @@
+{
+  "id": "travelagain19498.mysmartblindsLightMeter",
+  "version": 1,
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "Relative light level",
+      "displayType": "slider",
+      "slider": {
+        "value": "lightLevel.value",
+        "valueType": "integer",
+        "unit": "lightLevel.unit",
+        "range": [
+          0,
+          32767
+        ],
+        "supportedValues": "lightRange.value"
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "Relative light level",
+        "displayType": "numberField",
+        "numberField": {
+          "value": "lightLevel.value",
+          "valueType": "integer",
+          "unit": "lightLevel.unit",
+          "range": [
+            0,
+            32767
+          ]
+        }
+      }
+    ],
+    "actions": []
+  }
+}

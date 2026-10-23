@@ -9,6 +9,11 @@ retired MySmartBlinds cloud bridge. SmartThings provides remote app access and,
 when linked to Alexa, the route for voice commands. The ESP32 does not connect
 directly to Alexa.
 
+Screenshots below show the real GitHub and SmartThings Android interfaces. The
+bridge setup-page images are clearly labeled examples rendered from the firmware
+with sample data. Android values are from a customized installation, not defaults;
+follow the written recommendations. See [image details](screenshots/README.md).
+
 ## 1. Check the equipment
 
 Use the equipment listed in the [README](../README.md). The validated board
@@ -52,6 +57,10 @@ The backup is sensitive even though some fields are encoded.
 No Wi-Fi password or blind key belongs in the source code. The supplied firmware
 asks for those through its local setup page after installation.
 
+![GitHub Code menu with Download ZIP](screenshots/github-download-zip.jpg)
+
+*Choose Code, then Download ZIP on this project's GitHub page.*
+
 ## 4. Upload the firmware to the ESP32
 
 1. Connect the ESP32 with a USB **data** cable. Some charging cables carry no data.
@@ -93,6 +102,11 @@ Checkpoint: after roughly ten seconds, a new board should advertise Wi-Fi
 Checkpoint: the setup page opens while your phone/computer is on home Wi-Fi.
 Keep the token private. Do not forward the ESP's ports through your router.
 
+![Example bridge Wi-Fi setup page](screenshots/bridge-wifi-setup.jpg)
+
+*Setup-page example with sample data. Select your own 2.4 GHz network and enter
+its password; the sample values are not credentials for your board.*
+
 ## 6. Import the backup and enable one blind
 
 1. Close the original MySmartBlinds app so it releases its Bluetooth connection.
@@ -109,6 +123,11 @@ Keep the token private. Do not forward the ESP's ports through your router.
 Motor keys are stored on the ESP32. The setup page uses local HTTP, so perform
 the import only on a trusted network. The optional USB method below avoids
 sending motor keys over Wi-Fi.
+
+![Example import and blind assignment cards](screenshots/bridge-import-and-assignments.jpg)
+
+*Example after import: Living room and Kitchen are enabled on this bridge;
+Bedroom is stored but disabled. Start by enabling just one nearby blind.*
 
 ## 7. Install the SmartThings Edge driver
 
@@ -132,6 +151,11 @@ Downloading the source does not install a driver on your hub.
 
 The [official channel installation guide](https://developer.smartthings.com/docs/devices/hub-connected/enroll-in-a-shared-channel)
 describes invitation acceptance, hub enrollment, and driver installation.
+
+![SmartThings Android menu showing Settings](screenshots/smartthings-android-settings-menu.jpg)
+
+*On an opened device, use the top-right menu → Settings. Enter the private token
+on the bridge setup device; configure movement and polling on each blind.*
 
 ## 8. Test and customize one blind
 
@@ -163,6 +187,19 @@ intermittently stop short. Temperature and light conversion remain experimental.
    names manually if SmartThings adds a numeric suffix.
 
 Once SmartThings control works, you can use normal SmartThings routines.
+
+![Actual SmartThings Android blind controls](screenshots/smartthings-android-controls.jpg)
+
+*Actual Android controls showing one installation's live readings. The light bar
+uses sensor units, and the displayed temperatures are provisional, not verified
+room or battery temperatures. Your labels and readings may differ.*
+
+![Actual SmartThings Android presets, retries, and polling](screenshots/smartthings-android-basic-settings.jpg)
+
+*Customized example: Open 65%, Close 100%, retries 15, polling Off. These are
+**not defaults or beginner recommendations**. Start with retries 0; for a motor
+that occasionally stops short, observe it with a small limit such as 1–3.
+The shipped polling default is 2 minutes; Off can reduce battery use.*
 
 ## Use remote control and Alexa
 
@@ -251,6 +288,11 @@ like these:
 | Living room | Yes | No |
 | Kitchen | Yes | No |
 | Bedroom | No | Yes |
+
+![Example assignments on the upstairs bridge](screenshots/bridge-assignments-upstairs.jpg)
+
+*Compare with the downstairs example in step 6: only Bedroom is enabled here.
+The same backup can be stored on both boards, with each blind enabled on one.*
 
 The driver routes each blind's commands to its assigned bridge. Users continue
 to see one SmartThings device per blind and can include blinds from different

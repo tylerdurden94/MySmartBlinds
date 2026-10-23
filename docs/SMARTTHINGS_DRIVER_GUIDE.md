@@ -55,6 +55,12 @@ separate SmartThings device for each enabled blind.
 
 ## Controls and readings
 
+![Actual SmartThings Android blind controls](screenshots/smartthings-android-controls.jpg)
+
+*Genuine Android capture from one customized installation. Sensor values can be
+old; the temperature interpretation is provisional. The light bar is in sensor
+units, not confirmed lux. App layout can vary by version.*
+
 | Item | What it does |
 | --- | --- |
 | Open / Close | Moves to the Open or Close position you selected in Settings |
@@ -77,6 +83,18 @@ position. Group commands are handled serially; several blinds may move at
 different times. Opening a device page alone does not guarantee a fresh motor read.
 
 ## Basic settings
+
+Open the device's top-right menu and choose **Settings**:
+
+![SmartThings Android device menu](screenshots/smartthings-android-settings-menu.jpg)
+
+![SmartThings Android preset, retry, and polling settings](screenshots/smartthings-android-basic-settings.jpg)
+
+*This real installation uses custom values: Open 65%, Close 100%, retries 15,
+and polling Off. **Do not treat these as defaults or recommended starting
+settings.** The maximum retry limit of 15 can cause substantial extra motor work;
+use 0 for reliable motors or try 1–3 while observing an intermittent motor.
+The private bridge token is above the captured area and is not shown.*
 
 | Setting | Default / choices | Meaning |
 | --- | --- | --- |
@@ -197,6 +215,13 @@ does not establish calibration. Use the readings for experimentation and relativ
 trends until you have independently checked them.
 
 ### Temperature settings
+
+![SmartThings Android temperature and light settings](screenshots/smartthings-android-sensor-settings.jpg)
+
+*Real sensor preferences, with Provisional conversion enabled in this example.
+Leave temperature conversion disabled unless independently checked. The pictured
+light graph maximum of 3000 is customized; the default is 1000. The graph range
+does not calibrate the sensor. Lux calibration remains 0 in this example.*
 
 | Setting | Default / choices | What to know |
 | --- | --- | --- |

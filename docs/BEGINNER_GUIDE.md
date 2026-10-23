@@ -140,10 +140,16 @@ Bedroom is stored but disabled. Start by enabling just one nearby blind.*
 
 ## 7. Install the SmartThings Edge driver
 
-Use the [MySmartBlinds Community invitation](https://bestow-regional.api.smartthings.com/invite/gV2qaXZ9de29).
+Use the [TylerDurden94’s Edge Drivers invitation](https://bestow-regional.api.smartthings.com/invite/oDM8Q4Bkgp2L).
 Downloading the source does not install a driver on your hub.
 
-1. Open the community channel invitation from the README.
+This is a shared channel for the maintainer's projects. Choose **MySmartBlinds
+ESP Bridge** for this solution; other drivers are optional and are not installed
+just by enrolling. The channel used to be named MySmartBlinds Community. The
+original invitation and existing enrollment still work after the rename; the
+link above displays the new channel name.
+
+1. Open the **TylerDurden94’s Edge Drivers** channel invitation from the README.
 2. Sign in with the Samsung account that owns your SmartThings hub.
 3. Select **Accept**, find your hub, and select **Enroll**.
 4. Select **Available Drivers**, choose **MySmartBlinds ESP Bridge**, and

@@ -14,9 +14,17 @@ channel invitation. Publishing the driver source and publishing a channel are
 separate actions. Channel users do not need developer tools or their own custom
 capability namespace.
 
-Use a dedicated **MySmartBlinds Community** channel containing only this driver.
-A channel invitation grants access to the drivers on that channel, so keep its
-contents relevant to this project. Add a beta channel later if desired.
+Use the existing shared **TylerDurden94’s Edge Drivers** channel for this and
+other public projects maintained by TylerDurden94. Users enroll once and select
+the individual drivers they need. Keep each driver's name, package identity,
+source repository, and setup instructions distinct. A separate testing/beta
+channel can be added later; it is not required to publish another driver.
+
+This channel was originally named MySmartBlinds Community. It was renamed in
+place: the channel ID remains the same. A new invitation shows the shared
+channel name, while the original invitation remains active for previously
+shared links. Both URLs are recorded in `smartthings-release.json`. Existing
+users do not need to enroll or reinstall for this name change.
 
 The official [Driver Channels guide](https://developer.smartthings.com/docs/devices/hub-connected/driver-channels)
 documents packaging, assigning a specific version, and invitations. The
@@ -80,17 +88,30 @@ and returns the public driver's **driverId** and **version**. Record both.
 The public `packageKey` is `tylerdurden94.msb.espbridge`. Keep it stable when
 updating this driver so SmartThings can identify later package versions.
 
-## 4. Create a dedicated community channel
+## 4. Reuse the shared community channel
 
-From the repository root:
+For this project, reuse channel **36c02108-d699-4e4b-bed9-d019f5d3af9a**.
+Do not create another channel for each driver or routine release. To update
+the shared channel's name/description from this repository's template:
+
+```text
+smartthings edge:channels:update 36c02108-d699-4e4b-bed9-d019f5d3af9a --input smartthings-community-channel.json
+```
+
+The template filename is retained for compatibility; its channel name is
+TylerDurden94’s Edge Drivers. The name is separate from the driver's
+**MySmartBlinds ESP Bridge** name. Keep existing invitations active when updating channel metadata. Invitation
+branding is stored separately; changing the channel name does not rewrite it.
+
+Only maintainers publishing under a different account or deliberately creating
+a separate testing channel need to create a new one:
 
 ```text
 smartthings edge:channels:create --input smartthings-community-channel.json
 ```
 
-Record the returned **channelId**. The JSON gives the channel a public project
-description and links the repository's license. The repository URL must exist
-before distributing the invitation.
+For a new channel, record the returned **channelId** and adapt the template's
+name, description, and terms URL for its owner and purpose before sharing.
 
 Assign the exact reviewed version, substituting actual values:
 
@@ -99,7 +120,9 @@ smartthings edge:channels:assign DRIVER_ID DRIVER_VERSION --channel CHANNEL_ID
 smartthings edge:channels:drivers CHANNEL_ID
 ```
 
-Verify that the channel contains only the expected public driver and version.
+Verify that **MySmartBlinds ESP Bridge** has the expected driver ID and reviewed
+version. Other intentionally published drivers may coexist in the channel;
+assigning this driver's version must not unassign or replace those entries.
 Channels pin a driver version; uploading a new package alone does not promote
 it into every channel. Keep beta promotion separate. Review current SmartThings
 update behavior before telling users that a new version is installed; verify
@@ -107,16 +130,23 @@ the actual hub version, and provide reinstall/update steps when required.
 
 ## 5. Create and publish an invitation
 
+For the existing shared channel, keep using
+**[this public invitation](https://bestow-regional.api.smartthings.com/invite/oDM8Q4Bkgp2L)**.
+The older [MySmartBlinds Community invitation](https://bestow-regional.api.smartthings.com/invite/gV2qaXZ9de29)
+also remains valid. New drivers in this same channel use the shared invitation;
+do not create one per driver. For an intentionally new invitation, review the
+channel ID and metadata in the invitation template, then run:
+
 ```text
-smartthings edge:channels:invites:create --channel CHANNEL_ID
+smartthings edge:channels:invites:create --input smartthings-community-invite.json
 ```
 
-Use the CLI prompts to select sharing suitable for public community enrollment
-rather than restricting access to the maintainer's account. Record the returned
-invitation URL. Do not invent a URL from a channel ID.
+The supplied invitation template uses the same public community enrollment
+profile as the original invitation. Record the returned invitation URL and
+verify it before publishing. Do not invent a URL from a channel ID.
 
-Replace the pending-channel paragraph in README.md with a Markdown link to that
-exact invitation. Verify it opens the intended channel. Then follow the
+Link the exact invitation in the appropriate project's README and name the
+specific driver users should install. Verify it opens the intended channel. Follow the
 [beginner installation steps](BEGINNER_GUIDE.md#7-install-the-smartthings-edge-driver)
 on a test hub. Accepting the invitation, enrolling the hub, and installing the
 driver are three distinct steps. A separate user's hub is the best final check

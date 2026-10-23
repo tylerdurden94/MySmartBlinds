@@ -4,6 +4,12 @@ This guide explains the **MySmartBlinds ESP Bridge** Edge driver after you have
 installed it and discovered your blinds. For hardware, Wi-Fi, backup import, and
 driver installation, follow the [beginner guide](BEGINNER_GUIDE.md).
 
+The public installation channel is **[TylerDurden94’s Edge Drivers](https://bestow-regional.api.smartthings.com/invite/oDM8Q4Bkgp2L)**.
+It can host multiple projects; select **MySmartBlinds ESP Bridge** from its
+Available Drivers list. The channel rename from MySmartBlinds Community does not
+change this driver's name or your existing enrollment. The link above uses
+the new branding; the original invitation remains active.
+
 Jump to [multiple bridges](#multiple-bridges-and-blind-assignments),
 [controls](#controls-and-readings), [basic settings](#basic-settings),
 [polling and battery life](#polling-when-to-turn-it-on-and-the-battery-cost),

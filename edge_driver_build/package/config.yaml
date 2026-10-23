@@ -1,0 +1,7 @@
+name: MySmartBlinds ESP Bridge
+packageKey: tylerdurden94.msb.espbridge
+description: Local LAN driver for first generation MySmartBlinds tilt motors
+vendorSupportInformation: https://github.com/TylerDurden94/MySmartBlinds/issues
+permissions:
+  lan: {}
+  discovery: {}

@@ -95,8 +95,11 @@ ten-record-per-bridge import limit.
 
 ## Before you start
 
-- A classic ESP32-WROOM-32/32D development board with Bluetooth LE and a USB port.
-  This build targets `esp32dev`; other ESP32 variants have not been validated.
+- A classic ESP32 USB development board with Bluetooth LE and at least 4 MB
+  flash. WROOM-32/32D is the reference family. **WROOM-32U is expected compatible**
+  with the same firmware and a suitable external 2.4 GHz antenna, but has not
+  been physically validated here. See the [hardware compatibility and 32U setup guide](docs/HARDWARE_COMPATIBILITY.md)
+  for WROOM-32E/32UE, antenna requirements, and unsupported chip families.
 - A USB data cable, a computer, and 2.4 GHz Wi-Fi.
 - Working first-generation MySmartBlinds motors and a private JSON backup from
   the MySmartBlinds Android app. The backup supplies each motor's pairing key.

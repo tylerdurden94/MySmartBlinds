@@ -72,6 +72,24 @@ It reuses the existing motors; it does not require replacing the blind hardware.
 This repository contains the ESP32 bridge firmware and its matching SmartThings
 Edge driver. Up to ten blind records are supported per bridge.
 
+## Multiple ESP32 bridges
+
+A single ESP32 can serve several nearby blinds. Use additional ESP32s when
+Bluetooth coverage is unreliable across floors, distant rooms, or walls. Place
+each board near its assigned motors while keeping a reliable connection to your
+home Wi-Fi. All boards use this same firmware and the same Edge driver on one
+SmartThings hub.
+
+Import the compatible blind backup on each board, enable each blind on **exactly
+one** board, and enter each board's LAN token in its discovered SmartThings bridge
+setup device. The driver routes commands to the assigned board, while the blinds
+remain individual SmartThings devices usable together in routines and Alexa groups
+through SmartThings. The boards do not form a mesh or provide automatic failover.
+
+See the [step-by-step multiple-bridge setup and assignment example](docs/BEGINNER_GUIDE.md#9-use-multiple-esp32-bridges-for-better-coverage),
+including placement checks, moving a blind between bridges, and the current
+ten-record-per-bridge import limit.
+
 ## Before you start
 
 - A classic ESP32-WROOM-32/32D development board with Bluetooth LE and a USB port.
